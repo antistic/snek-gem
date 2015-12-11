@@ -251,7 +251,7 @@ var setup = function () {
 
     // sizes
     $('#info').width(canvas.width);
-    $('#messages').height(canvas.height);
+    $('#mainInfo').height(canvas.height);
 
     snakeCell = makeBlockImg("white");
     foodCell = makeBlockImg("white");
