@@ -200,7 +200,7 @@ var gameOver = function () {
     saveGame();
     addMessage('Game over. Score: ' + game.score);
 
-    $('#game').append('<div id="gameOverOverlay"><p>gem over</p></div>');
+    $('#game').append('<div id="gameOverOverlay"><p>gem over <span>click or press arrow keys</span></p></div>');
 
     $('#gameOverOverlay').height(canvas.height);
     $('#gameOverOverlay').width(canvas.width);
