@@ -144,6 +144,12 @@ function Snek(bodyList, direction) {
             return;
         }
 
+        // if you crashed into yourself
+        if (coordInArray(newHead, this.body) !== -1) {
+            gameOver();
+            return;
+        }
+
         // add newhead to the snake
         this.body.unshift(newHead);
 
