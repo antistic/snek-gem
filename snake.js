@@ -257,6 +257,21 @@ var setup = function () {
     foodCell = makeBlockImg("white");
 
     loadGame();
+
+    $('button[name="shop"]').click(function () {
+        unlock('shop');
+        $('#view').removeClass('show');
+        $('#messages').fadeIn(100);
+    });
+
+    $('button[name="shop"]').hover(function () {
+            $('#messages').fadeOut(100);
+            viewInfo(unlocks.shop.viewInfo.image, unlocks.shop.viewInfo.text);
+        },
+        function () {
+            $('#view').removeClass('show');
+            $('#messages').fadeIn(100);
+        });
 };
 
 var init = function () {

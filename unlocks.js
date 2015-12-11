@@ -13,3 +13,13 @@ var unlockShop = function () {
     $('#shop').prepend('<h2>Shop</h2>');
     $('button[name="shop"]').remove();
 };
+
+var viewInfo = function (imgURL, txt) {
+    var $view = $('#view');
+    $view.empty();
+
+    $view.append('<img src="' + imgURL + '"/>');
+    $view.append('<p>' + txt + '</p>');
+
+    $view.addClass('show');
+}
