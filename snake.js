@@ -88,6 +88,10 @@ var coordInArray = function (coord, coordArray) {
     return -1;
 };
 
+var addMessage = function (message) {
+    $('#messages').append('<p>' + message + '</p>');
+};
+
 var randomCoord = function () {
     var newCoord;
 
