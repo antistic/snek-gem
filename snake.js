@@ -91,7 +91,7 @@ var coordInArray = function (coord, coordArray) {
 };
 
 var addMessage = function (message) {
-    $('#messages').append('<p>' + message + '</p>');
+    $('#messages').prepend('<p>' + message + '</p>');
 };
 
 var randomCoord = function () {
