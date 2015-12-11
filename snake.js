@@ -16,6 +16,9 @@ var canvas, context,
     inventory = {
         apples: 0
     },
+    unlocks = {
+        shop: 0
+    },
     snake;
 
 CanvasRenderingContext2D.prototype.drawInCell = function (image, X, Y) {
@@ -36,12 +39,16 @@ CanvasRenderingContext2D.prototype.fillAll = function (canvas, colour) {
 };
 
 var saveGame = function () {
-    localStorage.saveData = JSON.stringify(inventory);
+    localStorage.invData = JSON.stringify(inventory);
+    localStorage.unlockData = JSON.stringify(unlocks);
 };
 
 var loadGame = function () {
-    if (localStorage.saveData !== undefined) {
-        inventory = JSON.parse(localStorage.saveData);
+    try {
+        inventory = JSON.parse(localStorage.invData);
+        unlocks = JSON.parse(localStorage.unlockData);
+    } catch (e) {
+        // don't do anything if it doesn't work - it'll take default values
     }
 
     addMessage("Game Loaded");
