@@ -237,8 +237,9 @@ var setup = function () {
     canvas.width = grid.cellSize * grid.width;
 
 
-    // also alter the size of the info bar
+    // sizes
     $('#info').width(canvas.width);
+    $('#messages').height(canvas.height);
 
     snakeCell = makeBlockImg("white");
     foodCell = makeBlockImg("white");
