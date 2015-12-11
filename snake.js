@@ -200,16 +200,10 @@ var gameOver = function () {
     saveGame();
     addMessage('Game over. Score: ' + game.score);
 
-    var d = document.createElement("div"),
-        p = document.createElement("p");
+    $('#game').append('<div id="gameOverOverlay"><p>gem over</p></div>');
 
-    d.id = "gameOverOverlay";
-    p.appendChild(document.createTextNode("gem over"));
-    d.appendChild(p);
-
-    d.setAttribute('style', 'height:' + canvas.height + 'px; width:' + canvas.width + 'px');
-
-    document.getElementById('game').appendChild(d);
+    $('#gameOverOverlay').height(canvas.height);
+    $('#gameOverOverlay').width(canvas.width);
 
     context.fillAll("black");
 
