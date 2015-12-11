@@ -6,10 +6,15 @@ var inventory = {
     snakeGame;
 
 document.addEventListener("DOMContentLoaded", function () {
+    loadGame();
+
     var $canvas = $('#canvas');
     snakeGame = new SnakeGame($canvas[0]);
     snakeGame.setup();
     snakeGame.init();
+
+    var items = new Items();
+    items.setup();
 });
 
 var saveGame = function () {

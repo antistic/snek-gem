@@ -204,10 +204,6 @@ function SnakeGame(canvas) {
 
         snekCell = makeBlockImg("white");
         foodCell = makeBlockImg("white");
-
-        loadGame();
-
-        makeButton('shop');
     };
 
     this.init = function () {

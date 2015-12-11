@@ -2,9 +2,11 @@
     "globals": {
         "unlocks": true,
         "snakeGame": true,
-        "SnakeGame": true
+        "SnakeGame": true,
+        "Items": true
     },
     "exported": {
-        "SnakeGame": true
+        "SnakeGame": true,
+        "Items": true
     }
 }
