@@ -43,6 +43,8 @@ var loadGame = function () {
     if (localStorage.saveData !== undefined) {
         inventory = JSON.parse(localStorage.saveData);
     }
+
+    addMessage("Game Loaded");
 };
 
 var opp = function (dir) {
