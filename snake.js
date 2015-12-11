@@ -213,9 +213,12 @@ var gameOver = function () {
         init();
     });
 
-    document.onkeydown = function () {
-        init();
-    };
+    // short delay so that keymashing doesn't restart immediately
+    setTimeout(function () {
+        document.onkeydown = function () {
+            init();
+        };
+    }, 200);
 };
 
 game.makeFood = function (ctx, coordArray) {
