@@ -261,8 +261,6 @@ function SnakeGame(canvas) {
         $('#gameOverOverlay').height(canvas.height);
         $('#gameOverOverlay').width(canvas.width);
 
-        fillAll("black");
-
         game.timer = null;
 
         $('#gameOverOverlay').click(function () {
