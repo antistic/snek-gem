@@ -16,20 +16,6 @@ var canvas, context,
     inventory = {
         apples: 0
     },
-    unlocks = {
-        shop: {
-            unlocked: 0,
-            name: 'shop',
-            price: 1,
-            viewInfo: {
-                image: '/media/shop.png',
-                text: "It's a shop. More specifically, access to the shop. Unfortunately you don't get to buy the whole shop."
-            },
-            boughtInfo: {
-                text: "Hang on. Where did you buy this from?"
-            }
-        }
-    },
     snake;
 
 CanvasRenderingContext2D.prototype.drawInCell = function (image, X, Y) {
@@ -258,20 +244,7 @@ var setup = function () {
 
     loadGame();
 
-    $('button[name="shop"]').click(function () {
-        unlock('shop');
-        $('#view').removeClass('show');
-        $('#messages').fadeIn(100);
-    });
-
-    $('button[name="shop"]').hover(function () {
-            $('#messages').fadeOut(100);
-            viewInfo(unlocks.shop.viewInfo.image, unlocks.shop.viewInfo.text);
-        },
-        function () {
-            $('#view').removeClass('show');
-            $('#messages').fadeIn(100);
-        });
+    makeButton('shop');
 };
 
 var init = function () {
