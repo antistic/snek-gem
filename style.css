@@ -1,0 +1,64 @@
+body {
+    font-family: sans-serif;
+}
+
+canvas,
+#gameOverOverlay {
+    border: 1px solid #555;
+}
+
+h1 {
+    font-family: Comic Sans MS;
+    text-align: center;
+}
+
+#game {
+    position: relative;
+}
+
+#gameOverOverlay {
+    background-color: rgba(255, 255, 255, .5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#info {
+    display: flex;
+    justify-content: space-between;
+}
+
+#container {
+    display: flex;
+    max-width: 720px;
+    max-height: 500px;
+    margin: 0 auto;
+}
+
+#shop {
+    padding: 1em;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#shop button {
+    background-color: #fff;
+    border: 1px solid #777;
+    padding: 0.5em;
+}
+
+#shop button:hover {
+    border-color: #222;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+#messages {
+    border: 1px solid #222;
+    flex: 1;
+    margin: 0 1em 1em 1em;
+}
