@@ -61,9 +61,13 @@ h1 {
 
 #shop {
     flex-grow: 1;
+}
+
+#items {
     display: flex;
     flex-direction: column;
-    height: 400px;
+    padding: 1em;
+    height: 300px;
     overflow-y: auto;
 }
 
@@ -76,13 +80,13 @@ h1 {
     text-align: center;
 }
 
-#shop button {
+#items button {
     background-color: #fff;
     border: 1px solid #777;
     padding: 0.5em;
 }
 
-#shop button:hover {
+#items button:hover {
     border-color: #222;
     background-color: #ddd;
     cursor: pointer;
