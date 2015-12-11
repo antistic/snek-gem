@@ -38,7 +38,7 @@ var viewInfo = function (imgURL, txt) {
     $view.append('<p>' + txt + '</p>');
 
     $view.addClass('show');
-}
+};
 
 var makeButton = function (item) {
     var $items = $('#items');

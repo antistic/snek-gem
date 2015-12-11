@@ -1,4 +1,5 @@
 /*jshint browser: true, jquery: true*/
+
 var canvas, context,
     snakeCell, foodCell,
     grid = {
@@ -12,9 +13,6 @@ var canvas, context,
         food: [],
         score: 0,
         apples: 0,
-    },
-    inventory = {
-        apples: 0
     },
     snake;
 
@@ -33,22 +31,6 @@ CanvasRenderingContext2D.prototype.fillAll = function (canvas, colour) {
     // fills the whole canvas with a colour
     this.fillStyle = colour;
     this.fillRect(0, 0, canvas.width, canvas.height);
-};
-
-var saveGame = function () {
-    localStorage.invData = JSON.stringify(inventory);
-    localStorage.unlockData = JSON.stringify(unlocks);
-};
-
-var loadGame = function () {
-    try {
-        inventory = JSON.parse(localStorage.invData);
-        unlocks = JSON.parse(localStorage.unlockData);
-    } catch (e) {
-        // don't do anything if it doesn't work - it'll take default values
-    }
-
-    addMessage("Game Loaded");
 };
 
 var opp = function (dir) {
@@ -92,10 +74,6 @@ var coordInArray = function (coord, coordArray) {
     }
 
     return -1;
-};
-
-var addMessage = function (message) {
-    $('#messages').prepend('<p>' + message + '</p>');
 };
 
 var randomCoord = function (coordArray) {
@@ -273,11 +251,6 @@ var init = function () {
     }
 };
 
-var updateInfoBar = function () {
-    $('#apples').text("Apples: " + inventory.apples);
-    $('#score').text("Score: " + game.score);
-};
-
 var movementHandler = function (e) {
     e = e || window.event;
     switch (e.keyCode) {
@@ -295,14 +268,3 @@ var movementHandler = function (e) {
         break;
     }
 };
-
-var Tick = function () {
-    snake.changeDir(game.direction);
-    snake.move(context);
-    updateInfoBar();
-};
-
-document.addEventListener("DOMContentLoaded", function () {
-    setup();
-    init();
-});
