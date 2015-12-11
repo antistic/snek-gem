@@ -209,9 +209,9 @@ var gameOver = function () {
 
     game.timer = null;
 
-    document.onclick = function () {
+    $('#gameOverOverlay').click(function () {
         init();
-    };
+    });
 
     document.onkeydown = function () {
         init();
