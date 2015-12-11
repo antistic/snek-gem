@@ -3,11 +3,11 @@ var unlocks = {
     shop: {
         unlocked: 0,
         name: 'shop',
-        buttonText: 'yo this is shop',
+        buttonText: 'buy a shop',
         price: 1,
         viewInfo: {
             image: '/media/shop.png',
-            text: "It's a shop. More specifically, access to the shop. Unfortunately you don't get to buy the whole shop."
+            text: "buy a shop. from where? a shop. which you are buying."
         },
         boughtInfo: {
             text: "Hang on. Where did you buy this from?"
