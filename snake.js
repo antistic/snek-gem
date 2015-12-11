@@ -17,7 +17,18 @@ var canvas, context,
         apples: 0
     },
     unlocks = {
-        shop: 0
+        shop: {
+            unlocked: 0,
+            name: 'shop',
+            price: 1,
+            viewInfo: {
+                image: '/media/shop.png',
+                text: "It's a shop. More specifically, access to the shop. Unfortunately you don't get to buy the whole shop."
+            },
+            boughtInfo: {
+                text: "Hang on. Where did you buy this from?"
+            }
+        }
     },
     snake;
 
