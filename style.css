@@ -17,13 +17,19 @@ h1 {
 }
 
 #gameOverOverlay {
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, .6);
     position: absolute;
     top: 0;
     left: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#gameOverOverlay p {
+    color: white;
+    font-weight: 700;
+    font-size: 24pt;
 }
 
 #info {
