@@ -198,6 +198,7 @@ var makeBlockImg = function (colour) {
 var gameOver = function () {
     clearInterval(game.timer);
     saveGame();
+    addMessage('Game over. Score: ' + game.score);
 
     var d = document.createElement("div"),
         p = document.createElement("p");
