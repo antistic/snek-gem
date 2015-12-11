@@ -88,14 +88,14 @@ var coordInArray = function (coord, coordArray) {
     return -1;
 };
 
-var randomCoord = function () {
+var randomCoord = function (coordArray) {
     var newCoord;
 
     newCoord = new Coord(Math.floor(Math.random() * grid.width),
         Math.floor(Math.random() * grid.height));
 
-    if (coordInArray(newCoord, snake.body) !== (-1)) {
-        newCoord = randomCoord();
+    if (coordInArray(newCoord, coordArray) !== (-1)) {
+        newCoord = randomCoord(coordArray);
     }
 
     return newCoord;
@@ -144,15 +144,6 @@ function Snek(bodyList, direction) {
             return;
         }
 
-        // if you crashed into yourself
-        if (coordInArray(newHead, this.body) !== -1) {
-            gameOver();
-            return;
-        }
-
-        // add newhead to the snake
-        this.body.unshift(newHead);
-
         // if you didn't have food
         var foodCollision = coordInArray(newHead, game.food);
         if (foodCollision === (-1)) {
@@ -165,8 +156,17 @@ function Snek(bodyList, direction) {
             saveGame();
             // remove from foodlist
             game.food.splice(foodCollision, 1);
-            game.makeFood(context);
+            game.makeFood(context, snake.body.concat(newHead));
         }
+
+        // if you crashed into yourself
+        if (coordInArray(newHead, this.body) !== -1) {
+            gameOver();
+            return;
+        }
+
+        // add newhead to the snake
+        this.body.unshift(newHead);
 
         // draw new head
         ctx.drawInCell(snakeCell, newHead.x, newHead.y);
@@ -217,8 +217,8 @@ var gameOver = function () {
     };
 };
 
-game.makeFood = function (ctx) {
-    var foodCoord = randomCoord();
+game.makeFood = function (ctx, coordArray) {
+    var foodCoord = randomCoord(coordArray);
     game.food.push(foodCoord);
     ctx.drawInCell(foodCell, foodCoord.x, foodCoord.y);
 };
@@ -253,7 +253,7 @@ var init = function () {
         "E");
     snake.drawSnek(context);
     game.food = [];
-    game.makeFood(context);
+    game.makeFood(context, snake.body);
 
     if (game.timer === null) {
         game.timer = window.setInterval(function () {
