@@ -43,6 +43,8 @@ var loadGame = function () {
     if (localStorage.saveData !== undefined) {
         inventory = JSON.parse(localStorage.saveData);
     }
+
+    addMessage("Game Loaded");
 };
 
 var opp = function (dir) {
@@ -86,6 +88,10 @@ var coordInArray = function (coord, coordArray) {
     }
 
     return -1;
+};
+
+var addMessage = function (message) {
+    $('#messages').prepend('<p>' + message + '</p>');
 };
 
 var randomCoord = function (coordArray) {
@@ -192,6 +198,7 @@ var makeBlockImg = function (colour) {
 var gameOver = function () {
     clearInterval(game.timer);
     saveGame();
+    addMessage('Game over. Score: ' + game.score);
 
     var d = document.createElement("div"),
         p = document.createElement("p");
@@ -230,8 +237,9 @@ var setup = function () {
     canvas.width = grid.cellSize * grid.width;
 
 
-    // also alter the size of the info bar
+    // sizes
     $('#info').width(canvas.width);
+    $('#messages').height(canvas.height);
 
     snakeCell = makeBlockImg("white");
     foodCell = makeBlockImg("white");
