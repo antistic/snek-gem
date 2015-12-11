@@ -1,22 +1,26 @@
 /*jshint browser: true, jquery: true*/
 var inventory = {
-    apples: 0
-};
+        apples: 0
+    },
+    unlocked = [],
+    snakeGame;
 
 document.addEventListener("DOMContentLoaded", function () {
-    setup();
-    init();
+    var $canvas = $('#canvas');
+    snakeGame = new SnakeGame($canvas[0]);
+    snakeGame.setup();
+    snakeGame.init();
 });
 
 var saveGame = function () {
     localStorage.invData = JSON.stringify(inventory);
-    localStorage.unlockData = JSON.stringify(unlocks);
+    localStorage.unlockData = JSON.stringify(unlocked);
 };
 
 var loadGame = function () {
     try {
         inventory = JSON.parse(localStorage.invData);
-        unlocks = JSON.parse(localStorage.unlockData);
+        unlocks = JSON.parse(localStorage.unlocked);
     } catch (e) {
         // don't do anything if it doesn't work - it'll take default values
     }
@@ -32,11 +36,4 @@ var updateInfoBar = function () {
 
 var addMessage = function (message) {
     $('#messages').prepend('<p>' + message + '</p>');
-};
-
-// what happens every tick
-var Tick = function () {
-    snake.changeDir(game.direction);
-    snake.move(context);
-    updateInfoBar();
 };

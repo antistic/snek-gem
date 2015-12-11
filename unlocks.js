@@ -1,7 +1,6 @@
 /*jshint browser: true, jquery: true*/
 var unlocks = {
     shop: {
-        unlocked: 0,
         name: 'shop',
         buttonText: 'buy a shop',
         price: 1,
