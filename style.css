@@ -105,6 +105,9 @@ h1 {
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 100%;
+    transition: all 0.2s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
 }
 
 #view {
@@ -122,6 +125,7 @@ h1 {
     transition-delay: 1s;
 }
 
+#messages.show,
 #view.show {
     visibility: visible;
     opacity: 1;

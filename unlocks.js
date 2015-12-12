@@ -2,7 +2,7 @@
 var unlocks = {
     shop: {
         buttonText: 'buy a shop',
-        price: [[0, 'apples']],
+        price: [[5, 'apples']],
         viewInfo: {
             image: '/media/shop.png',
             text: "buy a shop. from where? a shop. which you are buying.",
@@ -56,6 +56,7 @@ function Items() {
         );
 
         $view.addClass('show');
+        $('#messages').removeClass('show');
     }
 
     function boughtInfo(item) {
@@ -76,8 +77,7 @@ function Items() {
 
         setTimeout(function () {
             $view.removeClass('show');
-
-            $('#messages').fadeIn(100);
+            $('#messages').addClass('show');
         }, 4000);
     }
 
@@ -115,17 +115,16 @@ function Items() {
                     game.saveGame();
                 } else {
                     game.addMessage("Can't buy. You're too poor.");
-                    //                    $('#view').removeClass('show');
-                    //                    $('#messages').fadeIn(100);
+                    $('#view').removeClass('show');
+                    $('#messages').addClass('show');
                 }
             },
             mouseenter: function () {
-                $('#messages').fadeOut(100);
                 viewInfo(unlocks[item]);
             },
             mouseleave: function () {
                 $('#view').removeClass('show');
-                $('#messages').fadeIn(100);
+                $('#messages').addClass('show');
             }
         });
 
