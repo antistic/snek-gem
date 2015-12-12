@@ -3,7 +3,7 @@ var unlocks = {
     shop: {
         name: 'shop',
         buttonText: 'buy a shop',
-        price: 1,
+        price: [[5, 'apples']],
         viewInfo: {
             image: '/media/shop.png',
             text: "buy a shop. from where? a shop. which you are buying."
@@ -18,14 +18,33 @@ var unlocks = {
 };
 
 function Items() {
-    var self = this;
+    var self = this,
+        singular = {
+            'apples': 'apple'
+        };
 
     function viewInfo(item) {
         var $view = $('#view');
         $view.empty();
 
         $view.append('<img src="' + item.viewInfo.image + '"/>');
-        $view.append('<p class="price"><strong>Price: </strong>' + item.price + '</p>');
+
+        var priceText = '';
+        for (var i = 0; i < item.price.length; i++) {
+            var cost = item.price[i][0],
+                text;
+
+            if (cost === 1) {
+                text = singular[item.price[i][1]];
+            } else {
+                text = item.price[i][1];
+            }
+
+            priceText += cost + ' ' + text + ', ';
+        }
+        priceText = priceText.slice(0, -2);
+
+        $view.append('<p class="price"><strong>Price: </strong>' + priceText + '</p>');
         $view.append('<p class="description">' + item.viewInfo.text + '</p>');
 
         $view.addClass('show');
@@ -38,7 +57,17 @@ function Items() {
             name: unlocks[item].name,
             text: unlocks[item].buttonText,
             click: function () {
-                if (game.inventory.apples >= unlocks[item].price) {
+                var price = unlocks[item].price,
+                    canBuy = true;
+
+                for (var i = 0; i < price.length; i++) {
+                    if (game.inventory[price[i][1]] < price[i][0]) {
+                        canBuy = false;
+                        break;
+                    }
+                }
+
+                if (canBuy) {
                     unlocks[item].unlockAction();
                     $('#view').removeClass('show');
                     $('#messages').fadeIn(100);
