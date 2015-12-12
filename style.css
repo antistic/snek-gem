@@ -129,7 +129,13 @@ h1 {
 
 #view p {
     padding: 0.5em 1em;
+    margin: 0;
     font-size: 0.9em;
+}
+
+#view p.price {}
+
+#view .description {
     font-style: italic;
     color: #555;
 }
