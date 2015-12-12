@@ -44,8 +44,16 @@ function Items() {
         }
         priceText = priceText.slice(0, -2);
 
-        $view.append('<p class="price"><strong>Price: </strong>' + priceText + '</p>');
-        $view.append('<p class="description">' + item.viewInfo.text + '</p>');
+        $view.append(
+            '<p class="price"><strong>Price: </strong>' +
+            priceText +
+            '</p>'
+        );
+        $view.append(
+            '<p class="description">' +
+            item.viewInfo.text +
+            '</p>'
+        );
 
         $view.addClass('show');
     }
@@ -71,9 +79,12 @@ function Items() {
                         game.inventory[price[i][1]] -= price[i][0];
                     }
                     unlocks[item].unlockAction();
-                    $('#view').removeClass('show');
-                    $('#messages').fadeIn(100);
+                } else {
+                    game.addMessage("Can't buy. You're too poor.");
                 }
+
+                $('#view').removeClass('show');
+                $('#messages').fadeIn(100);
             },
             mouseenter: function () {
                 $('#messages').fadeOut(100);
