@@ -212,6 +212,7 @@ function SnakeGame(canvas) {
         window.addEventListener('keydown', movementHandler, false);
 
         $('#gameOverOverlay').remove();
+
         fillAll("Black");
 
         direction = 'E';
@@ -264,16 +265,19 @@ function SnakeGame(canvas) {
 
     function gameOver() {
         clearInterval(timer);
+        timer = null;
+
+        // safety first
         game.saveGame();
+
+        // tell 'em they failed
         game.addMessage('Game over. Score: ' + self.score);
 
-        $('#game').append('<div id="gameOverOverlay"><p>gem over <span>click or press arrow keys</span></p></div>');
-
+        $('#game').append('<div id="gameOverOverlay"><p>gem over <span>click or press space</span></p></div>');
         $('#gameOverOverlay').height(canvas.height);
         $('#gameOverOverlay').width(canvas.width);
 
-        timer = null;
-
+        // restart mechanics
         $('#gameOverOverlay').click(function () {
             self.init();
         });
