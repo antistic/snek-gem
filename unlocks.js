@@ -20,12 +20,13 @@ var unlocks = {
 function Items() {
     var self = this;
 
-    function viewInfo(imgURL, txt) {
+    function viewInfo(item) {
         var $view = $('#view');
         $view.empty();
 
-        $view.append('<img src="' + imgURL + '"/>');
-        $view.append('<p>' + txt + '</p>');
+        $view.append('<img src="' + item.viewInfo.image + '"/>');
+        $view.append('<p class="price">Price: ' + item.price + '</p>');
+        $view.append('<p>' + item.viewInfo.text + '</p>');
 
         $view.addClass('show');
     }
@@ -37,13 +38,15 @@ function Items() {
             name: unlocks[item].name,
             text: unlocks[item].buttonText,
             click: function () {
-                unlocks[item].unlockAction();
-                $('#view').removeClass('show');
-                $('#messages').fadeIn(100);
+                if (game.inventory.apples >= unlocks[item].price) {
+                    unlocks[item].unlockAction();
+                    $('#view').removeClass('show');
+                    $('#messages').fadeIn(100);
+                }
             },
             mouseenter: function () {
                 $('#messages').fadeOut(100);
-                viewInfo(unlocks[item].viewInfo.image, unlocks[item].viewInfo.text);
+                viewInfo(unlocks[item]);
             },
             mouseleave: function () {
                 $('#view').removeClass('show');
