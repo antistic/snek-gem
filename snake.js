@@ -203,6 +203,8 @@ function SnakeGame(canvas) {
 
         snekCell = makeBlockImg("white");
         foodCell = makeBlockImg("white");
+
+        window.addEventListener('keydown', blockDefault, false);
     };
 
     this.init = function () {
@@ -252,6 +254,14 @@ function SnakeGame(canvas) {
             self.init();
         }
     }
+
+    function blockDefault(e) {
+        // don't let arrow keys/space move the screen about
+        if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+            e.preventDefault();
+        }
+    }
+
     function gameOver() {
         clearInterval(timer);
         game.saveGame();
