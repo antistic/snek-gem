@@ -206,8 +206,8 @@ function SnakeGame(canvas) {
     };
 
     this.init = function () {
-        document.onclick = null;
-        document.onkeydown = movementHandler;
+        window.removeEventListener('keydown', restartHandler);
+        window.addEventListener('keydown', movementHandler, false);
 
         $('#gameOverOverlay').remove();
         fillAll("Black");
@@ -246,6 +246,12 @@ function SnakeGame(canvas) {
         }
     }
 
+    function restartHandler(e) {
+        // restart on space
+        if (e.keyCode === 32) {
+            self.init();
+        }
+    }
     function gameOver() {
         clearInterval(timer);
         game.saveGame();
@@ -262,12 +268,8 @@ function SnakeGame(canvas) {
             self.init();
         });
 
-        // short delay so that keymashing doesn't restart immediately
-        setTimeout(function () {
-            document.onkeydown = function () {
-                self.init();
-            };
-        }, 200);
+        window.removeEventListener('keydown', movementHandler);
+        window.addEventListener('keydown', restartHandler, false);
     }
 
     // what happens every tick
