@@ -208,22 +208,26 @@ function SnakeGame(canvas) {
     };
 
     this.init = function () {
+        // amend key functions
         window.removeEventListener('keydown', restartHandler);
         window.addEventListener('keydown', movementHandler, false);
 
-        $('#gameOverOverlay').remove();
-
-        fillAll("Black");
-
+        // reset variables
         direction = 'E';
         self.score = 0;
-        game.updateInfoBar();
-        snek = new Snek([new Coord(11, 10), new Coord(10, 10), new Coord(9, 10)],
-            "E");
-        snek.drawSnek();
         food = [];
-        makeFood(snek.body);
+        snek = new Snek([new Coord(11, 10),
+                         new Coord(10, 10),
+                         new Coord(9, 10)], "E");
 
+        // reset/refresh visuals
+        fillAll("Black");
+        $('#gameOverOverlay').remove();
+        snek.drawSnek();
+        makeFood(snek.body);
+        game.updateInfoBar();
+
+        // restart timer
         if (timer === null) {
             timer = window.setInterval(function () {
                 self.tick();
