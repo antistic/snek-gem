@@ -1,44 +1,53 @@
 /*jshint browser: true, jquery: true*/
 
+var game;
+
 document.addEventListener("DOMContentLoaded", function () {
-    var game = new Game();
-    game.loadGame();
-
-    var snakeGame;
-    var $canvas = $('#canvas');
-    snakeGame = new SnakeGame($canvas[0]);
-    snakeGame.setup();
-    snakeGame.init();
-
-    var items = new Items();
-    items.setup();
+    game = new Game();
+    game.setup();
 });
 
 function Game() {
-    var inventory = {
-            apples: 0
-        },
+    var self = this,
+        snakeGame,
+        items,
         unlocked = [];
 
+    this.inventory = {
+        apples: 0
+    };
+
+    this.setup = function () {
+        game.loadGame();
+
+        var $canvas = $('#canvas');
+        snakeGame = new SnakeGame($canvas[0]);
+        snakeGame.setup();
+        snakeGame.init();
+
+        items = new Items();
+        items.setup();
+    };
+
     this.saveGame = function () {
-        localStorage.invData = JSON.stringify(inventory);
+        localStorage.invData = JSON.stringify(self.inventory);
         localStorage.unlockData = JSON.stringify(unlocked);
     };
 
     this.loadGame = function () {
         try {
-            inventory = JSON.parse(localStorage.invData);
-            unlocks = JSON.parse(localStorage.unlocked);
+            self.inventory = JSON.parse(localStorage.invData);
+            unlocked = JSON.parse(localStorage.unlocked);
         } catch (e) {
             // don't do anything if it doesn't work - it'll take default values
         }
 
-        addMessage("Game Loaded");
+        self.addMessage("Game Loaded");
     };
 
     this.updateInfoBar = function () {
-        $('#apples').text("Apples: " + inventory.apples);
-        $('#score').text("Score: " + game.score);
+        $('#apples').text("Apples: " + self.inventory.apples);
+        $('#score').text("Score: " + snakeGame.score);
     };
 
     this.addMessage = function (message) {
