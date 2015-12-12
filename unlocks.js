@@ -25,8 +25,8 @@ function Items() {
         $view.empty();
 
         $view.append('<img src="' + item.viewInfo.image + '"/>');
-        $view.append('<p class="price">Price: ' + item.price + '</p>');
-        $view.append('<p>' + item.viewInfo.text + '</p>');
+        $view.append('<p class="price"><strong>Price: </strong>' + item.price + '</p>');
+        $view.append('<p class="description">' + item.viewInfo.text + '</p>');
 
         $view.addClass('show');
     }
