@@ -1,21 +1,20 @@
 /*jshint browser: true, jquery: true*/
 
 function SnakeGame(canvas) {
-    var context,
+    var self = this,
+        context,
         snekCell, foodCell,
         grid = {
             cellSize: 16,
             height: 16,
             width: 25
         },
-        game = {
-            timer: null,
-            direction: 'E',
-            food: [],
-            score: 0
-        },
-        snek,
-        self = this;
+        timer = null,
+        direction = 'E',
+        food = [],
+        snek;
+
+    this.score = 0;
 
     /* Drawing fun */
     function drawInCell(image, X, Y) {
@@ -158,17 +157,17 @@ function SnakeGame(canvas) {
             }
 
             // if you didn't have food
-            var foodCollision = findCoordInArray(newHead, game.food);
+            var foodCollision = findCoordInArray(newHead, food);
             if (foodCollision === (-1)) {
                 var end = this.body.pop();
                 clearCell("black", end.x, end.y);
             } else {
                 // if you had food
-                game.score++;
-                inventory.apples++;
-                saveGame();
+                self.score++;
+                game.inventory.apples++;
+                game.saveGame();
                 // remove from foodlist
-                game.food.splice(foodCollision, 1);
+                food.splice(foodCollision, 1);
                 makeFood(snek.body.concat(newHead));
             }
 
@@ -186,10 +185,10 @@ function SnakeGame(canvas) {
         };
     }
 
-    /* Game shenanigans */
+    /* actual snake game shenanigans */
     function makeFood(coordArray) {
         var foodCoord = randomCoord(coordArray);
-        game.food.push(foodCoord);
+        food.push(foodCoord);
         drawInCell(foodCell, foodCoord.x, foodCoord.y);
     }
 
@@ -213,17 +212,17 @@ function SnakeGame(canvas) {
         $('#gameOverOverlay').remove();
         fillAll("Black");
 
-        game.direction = 'E';
-        game.score = 0;
-        updateInfoBar();
+        direction = 'E';
+        self.score = 0;
+        game.updateInfoBar();
         snek = new Snek([new Coord(11, 10), new Coord(10, 10), new Coord(9, 10)],
             "E");
         snek.drawSnek();
-        game.food = [];
+        food = [];
         makeFood(snek.body);
 
-        if (game.timer === null) {
-            game.timer = window.setInterval(function () {
+        if (timer === null) {
+            timer = window.setInterval(function () {
                 self.tick();
             }, 200);
         }
@@ -233,31 +232,31 @@ function SnakeGame(canvas) {
         e = e || window.event;
         switch (e.keyCode) {
         case 38:
-            game.direction = "N";
+            direction = "N";
             break;
         case 40:
-            game.direction = "S";
+            direction = "S";
             break;
         case 37:
-            game.direction = "W";
+            direction = "W";
             break;
         case 39:
-            game.direction = "E";
+            direction = "E";
             break;
         }
     }
 
     function gameOver() {
-        clearInterval(game.timer);
-        saveGame();
-        addMessage('Game over. Score: ' + game.score);
+        clearInterval(timer);
+        game.saveGame();
+        game.addMessage('Game over. Score: ' + self.score);
 
         $('#game').append('<div id="gameOverOverlay"><p>gem over <span>click or press arrow keys</span></p></div>');
 
         $('#gameOverOverlay').height(canvas.height);
         $('#gameOverOverlay').width(canvas.width);
 
-        game.timer = null;
+        timer = null;
 
         $('#gameOverOverlay').click(function () {
             self.init();
@@ -273,8 +272,8 @@ function SnakeGame(canvas) {
 
     // what happens every tick
     this.tick = function () {
-        snek.changeDir(game.direction);
+        snek.changeDir(direction);
         snek.move(context);
-        updateInfoBar();
+        game.updateInfoBar();
     };
 }
