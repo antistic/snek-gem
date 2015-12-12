@@ -24,7 +24,6 @@ function Game() {
         var $canvas = $('#canvas');
         snakeGame = new SnakeGame($canvas[0]);
         snakeGame.setup();
-        snakeGame.init();
 
         items = new Items();
         items.setup();

@@ -16,7 +16,7 @@ h1 {
     position: relative;
 }
 
-#gameOverOverlay {
+.gameOverlay {
     background-color: rgba(255, 255, 255, .5);
     position: absolute;
     top: 0;
@@ -28,7 +28,7 @@ h1 {
     cursor: pointer;
 }
 
-#gameOverOverlay p {
+.gameOverlay p {
     color: white;
     text-align: center;
     font-weight: 700;
@@ -37,7 +37,7 @@ h1 {
     text-shadow: 0 0 10px black;
 }
 
-#gameOverOverlay span {
+.gameOverlay span {
     color: #ddd;
     display: block;
     font-size: 14pt;

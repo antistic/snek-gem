@@ -204,7 +204,19 @@ function SnakeGame(canvas) {
         snekCell = makeBlockImg("white");
         foodCell = makeBlockImg("white");
 
+        // starting visuals
+        fillAll("black");
+        $('#game').append('<div class="gameOverlay"><p>stert gem<span>click or press space</span></p></div>');
+        $('.gameOverlay').height(canvas.height);
+        $('.gameOverlay').width(canvas.width);
+
+        // starting controls
+        $('.gameOverlay').click(function () {
+            self.init();
+        });
+
         window.addEventListener('keydown', blockDefault, false);
+        window.addEventListener('keydown', restartHandler, false);
     };
 
     this.init = function () {
@@ -222,7 +234,7 @@ function SnakeGame(canvas) {
 
         // reset/refresh visuals
         fillAll("Black");
-        $('#gameOverOverlay').remove();
+        $('.gameOverlay').remove();
         snek.drawSnek();
         makeFood(snek.body);
         game.updateInfoBar();
@@ -277,12 +289,12 @@ function SnakeGame(canvas) {
         // tell 'em they failed
         game.addMessage('Game over. Score: ' + self.score);
 
-        $('#game').append('<div id="gameOverOverlay"><p>gem over <span>click or press space</span></p></div>');
-        $('#gameOverOverlay').height(canvas.height);
-        $('#gameOverOverlay').width(canvas.width);
+        $('#game').append('<div class="gameOverlay"><p>gem over <span>click or press space</span></p></div>');
+        $('.gameOverlay').height(canvas.height);
+        $('.gameOverlay').width(canvas.width);
 
         // restart mechanics
-        $('#gameOverOverlay').click(function () {
+        $('.gameOverlay').click(function () {
             self.init();
         });
 
