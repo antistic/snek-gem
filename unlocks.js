@@ -66,8 +66,10 @@ function Items() {
                         break;
                     }
                 }
-
                 if (canBuy) {
+                    for (i = 0; i < price.length; i++) {
+                        game.inventory[price[i][1]] -= price[i][0];
+                    }
                     unlocks[item].unlockAction();
                     $('#view').removeClass('show');
                     $('#messages').fadeIn(100);
