@@ -2,10 +2,11 @@
 var unlocks = {
     shop: {
         buttonText: 'buy a shop',
-        price: [[5, 'apples']],
+        price: [[0, 'apples']],
         viewInfo: {
             image: '/media/shop.png',
-            text: "buy a shop. from where? a shop. which you are buying."
+            text: "buy a shop. from where? a shop. which you are buying.",
+            boughtText: "you bought a shop. or rather, access to one. you have to buy the things in it separately."
         },
         unlockAction: function () {
             $('#shop').removeClass('notashop');
@@ -57,6 +58,29 @@ function Items() {
         $view.addClass('show');
     }
 
+    function boughtInfo(item) {
+        var $view = $('#view');
+        $view.empty();
+
+        $view.append('<img src="' + item.viewInfo.image + '"/>');
+
+        $view.append(
+            '<p class="description">' +
+            item.viewInfo.boughtText +
+            '</p>'
+        );
+
+        $('#messages').fadeOut(100);
+        $view.addClass('slowTransition');
+        $view.addClass('show');
+
+        setTimeout(function () {
+            $view.removeClass('show');
+
+            $('#messages').fadeIn(100);
+        }, 4000);
+    }
+
     this.makeButton = function (item) {
         var $items = $('#items');
 
@@ -85,13 +109,15 @@ function Items() {
                         game.unlockable.splice(index, 1);
                     }
 
+                    $(this).mouseleave = null;
+                    boughtInfo(unlocks[item]);
+
                     game.saveGame();
                 } else {
                     game.addMessage("Can't buy. You're too poor.");
+                    //                    $('#view').removeClass('show');
+                    //                    $('#messages').fadeIn(100);
                 }
-
-                $('#view').removeClass('show');
-                $('#messages').fadeIn(100);
             },
             mouseenter: function () {
                 $('#messages').fadeOut(100);
