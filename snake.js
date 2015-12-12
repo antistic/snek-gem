@@ -209,6 +209,7 @@ function SnakeGame(canvas) {
         $('#game').append('<div class="gameOverlay"><p>stert gem<span>click or press space</span></p></div>');
         $('.gameOverlay').height(canvas.height);
         $('.gameOverlay').width(canvas.width);
+        game.updateInfoBar();
 
         // starting controls
         $('.gameOverlay').click(function () {
