@@ -6,7 +6,7 @@ var unlocks = {
         viewInfo: {
             image: '/media/shop.png',
             text: "buy a shop. from where? a shop. which you are buying.",
-            boughtText: "you bought a shop. or rather, access to one. you have to buy the things in it separately."
+            boughtText: "you bought a shop. or rather, access to one. you have to buy the things in it separately. lol"
         },
         unlockAction: function () {
             $('#shop').removeClass('notashop');
