@@ -10,9 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
 function Game() {
     var self = this,
         snakeGame,
-        items,
-        unlocked = [];
+        items;
 
+    this.unlocked = [];
+    this.unlockable = ['shop'];
     this.inventory = {
         apples: 0
     };
@@ -30,14 +31,16 @@ function Game() {
     };
 
     this.saveGame = function () {
-        localStorage.invData = JSON.stringify(self.inventory);
-        localStorage.unlockData = JSON.stringify(unlocked);
+        localStorage.inventory = JSON.stringify(self.inventory);
+        localStorage.unlocked = JSON.stringify(self.unlocked);
+        localStorage.unlockable = JSON.stringify(self.unlockable);
     };
 
     this.loadGame = function () {
         try {
-            self.inventory = JSON.parse(localStorage.invData);
-            unlocked = JSON.parse(localStorage.unlocked);
+            self.inventory = JSON.parse(localStorage.inventory);
+            self.unlocked = JSON.parse(localStorage.unlocked);
+            self.unlockable = JSON.parse(localStorage.unlockable);
         } catch (e) {
             // don't do anything if it doesn't work - it'll take default values
         }
