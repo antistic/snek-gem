@@ -57,4 +57,10 @@ function Game() {
     this.addMessage = function (message) {
         $('#messages').prepend('<p>' + message + '</p>');
     };
+
+    this.checkEmptyShop = function () {
+        if (self.unlockable.length === 0) {
+            $('#items').append("<p id='empty'>There's nothing to buy...</p>");
+        }
+    };
 }

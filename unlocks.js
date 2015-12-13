@@ -137,6 +137,7 @@ function Items() {
                     boughtInfo(unlocks[item]);
 
                     game.saveGame();
+                    game.checkEmptyShop();
 
                     $(this).remove();
                 } else {
@@ -161,6 +162,7 @@ function Items() {
         if (item === undefined) {
             return;
         } else {
+            $('#empty').remove();
             game.unlockable.push(item);
             self.makeButton(item);
         }
@@ -174,5 +176,7 @@ function Items() {
         for (i = 0; i < game.unlockable.length; i++) {
             self.makeButton(game.unlockable[i]);
         }
+
+        game.checkEmptyShop();
     };
 }
