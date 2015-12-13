@@ -102,6 +102,7 @@ function Items() {
                         game.inventory[price[i][1]] -= price[i][0];
                     }
                     unlocks[item].unlockAction();
+                    newUnlockable(unlocks[item].unlocks);
                     game.unlocked.push(item);
 
                     var index = game.unlockable.indexOf(item);
@@ -130,6 +131,15 @@ function Items() {
 
         $items.append(b);
     };
+
+    function newUnlockable(item) {
+        if (item === undefined) {
+            return;
+        } else {
+            game.unlockable.push(item);
+            self.makeButton(item);
+        }
+    }
 
     this.setup = function () {
         for (var i = 0; i < game.unlocked.length; i++) {
