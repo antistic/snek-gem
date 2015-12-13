@@ -1,5 +1,5 @@
 body {
-    font-family: sans-serif;
+    font-family: Comic Sans MS;
 }
 
 canvas,
@@ -16,14 +16,35 @@ h1 {
     position: relative;
 }
 
-#gameOverOverlay {
+.gameOverlay {
     background-color: rgba(255, 255, 255, .5);
+    border: 1px solid black;
     position: absolute;
     top: 0;
     left: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.gameOverlay p {
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24pt;
+    display: block;
+    text-shadow: 0 0 10px black;
+}
+
+.gameOverlay span {
+    color: #ddd;
+    display: block;
+    font-size: 14pt;
+    font-weight: 200;
+    font-style: italic;
+    padding-top: 0.2em;
 }
 
 #info {
@@ -33,32 +54,115 @@ h1 {
 
 #container {
     display: flex;
+    flex-direction: row;
     max-width: 720px;
-    max-height: 500px;
+    max-height: 720px;
     margin: 0 auto;
 }
 
 #shop {
-    padding: 1em;
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
 }
 
-#shop button {
+#items {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    height: 300px;
+    overflow-y: auto;
+}
+
+#shop h2 {
+    margin: 0 auto;
+    font-family: Comic Sans MS;
+    padding-bottom: 0.4em;
+    border-bottom: 1px solid #222;
+    width: 100%;
+    text-align: center;
+}
+
+#items button {
     background-color: #fff;
     border: 1px solid #777;
     padding: 0.5em;
+    font-family: comic sans ms;
 }
 
-#shop button:hover {
+#items button:hover {
     border-color: #222;
     background-color: #ddd;
     cursor: pointer;
 }
 
-#messages {
+#mainInfo {
     border: 1px solid #222;
     flex: 1;
     margin: 0 1em 1em 1em;
+    position: relative;
+}
+
+#messages {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100%;
+    transition: all 0.2s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#view {
+    background-color: white;
+    height: 80%;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.slowTransition {
+    transition-delay: 1s;
+}
+
+#messages.show,
+#view.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+#view {}
+
+#view .imgContainer {
+    margin: 0 auto;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+}
+
+#view p {
+    padding: 0 0.7em;
+    margin: 0;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+}
+
+#view p.price {
+    flex: 1 0 auto;
+}
+
+#view p.description {
+    flex: 3 0 auto;
+    font-style: italic;
+    color: #555;
+    text-align: justify;
+}
+
+#messages p {
+    padding: 0.5em;
+    margin: 0;
+    color: #555;
 }
