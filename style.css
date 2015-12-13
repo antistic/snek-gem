@@ -119,6 +119,8 @@ h1 {
     top: 0;
     left: 0;
     transition: all 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
 }
 
 .slowTransition {
@@ -131,22 +133,32 @@ h1 {
     opacity: 1;
 }
 
-#view img {
-    margin: 0.5em auto;
-    display: block;
+#view {}
+
+#view .imgContainer {
+    margin: 0 auto;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
 }
 
 #view p {
-    padding: 0.5em 1em;
+    padding: 0 0.7em;
     margin: 0;
     font-size: 0.9em;
+    display: flex;
+    align-items: center;
 }
 
-#view p.price {}
+#view p.price {
+    flex: 1 0 auto;
+}
 
-#view .description {
+#view p.description {
+    flex: 3 0 auto;
     font-style: italic;
     color: #555;
+    text-align: justify;
 }
 
 #messages p {

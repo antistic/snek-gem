@@ -200,6 +200,7 @@ function SnakeGame(canvas) {
         // sizes
         $('#info').width(canvas.width);
         $('#mainInfo').height(canvas.height);
+        $('#view').height(canvas.height);
 
         snekCell = makeBlockImg("white");
         foodCell = makeBlockImg("white");

@@ -38,8 +38,6 @@ function Items() {
         var $view = $('#view');
         $view.empty();
 
-        $view.append('<img src="' + item.viewInfo.image + '"/>');
-
         var priceText = '';
         for (var i = 0; i < item.price.length; i++) {
             var cost = item.price[i][0],
@@ -55,8 +53,12 @@ function Items() {
         }
         priceText = priceText.slice(0, -2);
 
+        $view.append('<div class="imgContainer"><img src="' +
+            item.viewInfo.image +
+            '"/></div>');
+
         $view.append(
-            '<p class="price"><strong>Price: </strong>' +
+            '<p class="price"><strong>Price:&nbsp;</strong>' +
             priceText +
             '</p>'
         );
@@ -74,7 +76,9 @@ function Items() {
         var $view = $('#view');
         $view.empty();
 
-        $view.append('<img src="' + item.viewInfo.image + '"/>');
+            $view.append('<div class="imgContainer"><img src="' +
+                item.viewInfo.image +
+                '"/></div>');
 
         $view.append(
             '<p class="description">' +
