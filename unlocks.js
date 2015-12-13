@@ -10,9 +10,7 @@ var unlocks = {
         },
         unlockAction: function () {
             $('#shop').removeClass('notashop');
-
             $('#shop').prepend('<h2>Shop</h2>');
-            $('button[name="shop"]').remove();
         },
         unlocks: 'appleColour'
     },
@@ -127,6 +125,8 @@ function Items() {
                     boughtInfo(unlocks[item]);
 
                     game.saveGame();
+
+                    $(this).remove();
                 } else {
                     game.addMessage("Can't buy. You're too poor.");
                     $('#view').removeClass('show');
