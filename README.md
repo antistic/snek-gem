@@ -1,5 +1,5 @@
-SNEK GEM
-========
+[SNEK GEM](http://notantonia.github.io/snek-gem/)
+=================================================
 
 A snake incremental.
 
