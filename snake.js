@@ -309,4 +309,14 @@ function SnakeGame(canvas) {
         snek.move(context);
         game.updateInfoBar();
     };
+
+    /* Unlockable actions!! */
+    this.redApple = function () {
+        foodCell = makeBlockImg("red");
+
+        //make current food red
+        for (var i = 0; i < food.length; i++) {
+            drawInCell(foodCell, food[i].x, food[i].y);
+        }
+    };
 }

@@ -14,6 +14,19 @@ var unlocks = {
             $('#shop').prepend('<h2>Shop</h2>');
             $('button[name="shop"]').remove();
         },
+        unlocks: 'appleColour'
+    },
+    appleColour: {
+        buttonText: 'colour your apples',
+        price: [[0, 'apples']],
+        viewInfo: {
+            image: '/media/apple.png',
+            text: "colour your apples! now you won't ever confuse them with your snake again. what do you mean you were never confused. you were. you so  were.",
+            boughtText: "despite the image, your apple is still square shaped. but at least it's red...?"
+        },
+        unlockAction: function () {
+            game.snakeGame.redApple();
+        }
     }
 };
 

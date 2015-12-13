@@ -9,8 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function Game() {
     var self = this,
-        snakeGame,
         items;
+
+    this.snakeGame = null;
 
     this.unlocked = [];
     this.unlockable = ['shop'];
@@ -22,8 +23,9 @@ function Game() {
         game.loadGame();
 
         var $canvas = $('#canvas');
-        snakeGame = new SnakeGame($canvas[0]);
-        snakeGame.setup();
+
+        self.snakeGame = new SnakeGame($canvas[0]);
+        self.snakeGame.setup();
 
         items = new Items();
         items.setup();
@@ -49,7 +51,7 @@ function Game() {
 
     this.updateInfoBar = function () {
         $('#apples').text("Apples: " + self.inventory.apples);
-        $('#score').text("Score: " + snakeGame.score);
+        $('#score').text("Score: " + self.snakeGame.score);
     };
 
     this.addMessage = function (message) {
