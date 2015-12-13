@@ -74,26 +74,34 @@ function Items() {
 
     function boughtInfo(item) {
         var $view = $('#view');
-        $view.empty();
 
+        $view.removeClass('show');
+
+        setTimeout(function () {
+            $view.empty();
             $view.append('<div class="imgContainer"><img src="' +
                 item.viewInfo.image +
                 '"/></div>');
+            $view.append(
+                '<p class="description">' +
+                item.viewInfo.boughtText +
+                '</p>'
+            );
 
-        $view.append(
-            '<p class="description">' +
-            item.viewInfo.boughtText +
-            '</p>'
-        );
+            $view.addClass('show');
+            $('#messages').removeClass('show');
 
-        $('#messages').removeClass('show');
-        $view.addClass('slowTransition');
-        $view.addClass('show');
+            $view.addClass('slowTransition');
 
-        setTimeout(function () {
-            $view.removeClass('show');
-            $('#messages').addClass('show');
-        }, 4000);
+            setTimeout(function () {
+                $view.removeClass('show');
+                $('#messages').addClass('show');
+
+                setTimeout(function () {
+                    $view.removeClass('slowTransition');
+                });
+            }, 5000);
+        }, 500);
     }
 
     this.makeButton = function (item) {
