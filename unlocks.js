@@ -16,7 +16,7 @@ var unlocks = {
     },
     appleColour: {
         buttonText: 'colour your apples',
-        price: [[0, 'apples']],
+        price: [[3, 'apples']],
         viewInfo: {
             image: '/media/apple.png',
             text: "colour your apples! now you won't ever confuse them with your snake again. what do you mean you were never confused. you were. you so  were.",
