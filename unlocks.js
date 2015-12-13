@@ -86,7 +86,7 @@ function Items() {
             '</p>'
         );
 
-        $('#messages').fadeOut(100);
+        $('#messages').removeClass('show');
         $view.addClass('slowTransition');
         $view.addClass('show');
 
