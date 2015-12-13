@@ -4,7 +4,7 @@ var unlocks = {
         buttonText: 'buy a shop',
         price: [[5, 'apples']],
         viewInfo: {
-            image: '/snek-gem/media/shop.png',
+            image: './media/shop.png',
             text: "buy a shop. from where? a shop. which you are buying.",
             boughtText: "you bought a shop. or rather, access to one. you have to buy the things in it separately. lol"
         },
@@ -18,7 +18,7 @@ var unlocks = {
         buttonText: 'colour your apples',
         price: [[3, 'apples']],
         viewInfo: {
-            image: '/snek-gem/media/apple.png',
+            image: './media/apple.png',
             text: "colour your apples! now you won't ever confuse them with your snake again. what do you mean you were never confused. you were. you so  were.",
             boughtText: "despite the image, your apple is still square shaped. but at least it's red...?"
         },
