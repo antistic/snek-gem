@@ -1,5 +1,3 @@
-/*jshint browser: true, jquery: true*/
-
 var game;
 
 document.addEventListener("DOMContentLoaded", function () {

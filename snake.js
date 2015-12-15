@@ -1,5 +1,3 @@
-/*jshint browser: true, jquery: true*/
-
 function SnakeGame(canvas) {
     var self = this,
         context,

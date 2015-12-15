@@ -1,4 +1,3 @@
-/*jshint browser: true, jquery: true*/
 var unlocks = {
     shop: {
         buttonText: 'buy a shop',
