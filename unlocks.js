@@ -11,7 +11,7 @@ var unlocks = {
             $('#shop').removeClass('notashop');
             $('#shop').prepend('<h2>Shop</h2>');
         },
-        unlocks: 'appleColour'
+        unlocks: ['appleColour', 'faster1']
     },
     appleColour: {
         buttonText: 'colour your apples',
@@ -24,6 +24,7 @@ var unlocks = {
         unlockAction: function () {
             game.snakeGame.redApple();
         },
+        unlocks: []
     },
     faster1: {
         buttonText: 'buy some speed',
@@ -36,7 +37,7 @@ var unlocks = {
         unlockAction: function () {
             game.snakeGame.changeSpeed(350);
         },
-        unlocks: 'faster2'
+        unlocks: ['faster2']
     },
     faster2: {
         buttonText: 'buy some more speed',
@@ -49,6 +50,7 @@ var unlocks = {
         unlockAction: function () {
             game.snakeGame.changeSpeed(200);
         },
+        unlocks: []
     }
 };
 
@@ -148,8 +150,12 @@ function Items() {
                     for (i = 0; i < price.length; i++) {
                         game.inventory[price[i][1]] -= price[i][0];
                     }
+
+                    for (i = 0; i < unlocks[item].unlocks.length; i++) {
+                        newUnlockable(unlocks[item].unlocks[i]);
+                    }
+
                     unlocks[item].unlockAction();
-                    newUnlockable(unlocks[item].unlocks);
                     game.unlocked.push(item);
 
                     var index = game.unlockable.indexOf(item);
