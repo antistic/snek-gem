@@ -147,28 +147,33 @@ function Items() {
                     }
                 }
                 if (canBuy) {
+                    // deduct price
                     for (i = 0; i < price.length; i++) {
                         game.inventory[price[i][1]] -= price[i][0];
                     }
 
+                    // unlock new things
                     for (i = 0; i < unlocks[item].unlocks.length; i++) {
                         newUnlockable(unlocks[item].unlocks[i]);
                     }
 
+                    // it's now unlocked!!
                     unlocks[item].unlockAction();
                     game.unlocked.push(item);
-
                     var index = game.unlockable.indexOf(item);
                     if (index > -1) {
                         game.unlockable.splice(index, 1);
                     }
 
+                    // show message
                     $(this).mouseleave = null;
                     boughtInfo(unlocks[item]);
 
+                    // safety
                     game.saveGame();
                     game.checkEmptyShop();
 
+                    // gooooodbye
                     $(this).remove();
                 } else {
                     game.addMessage("Can't buy. You're too poor.");
