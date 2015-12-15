@@ -1,7 +1,7 @@
 var unlocks = {
     shop: {
         buttonText: 'buy a shop',
-        price: [[5, 'apples']],
+        price: [[2, 'apples']],
         viewInfo: {
             image: '/media/shop.png',
             text: "buy a shop. from where? a shop. which you are buying.",
