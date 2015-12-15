@@ -5,3 +5,4 @@
 *.swp
 /media/*.sai
 .jshintrc
+testing.js

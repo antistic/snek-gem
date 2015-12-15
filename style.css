@@ -72,6 +72,10 @@ h1 {
     overflow-y: auto;
 }
 
+#items button {
+    margin: 0.7em 0;
+}
+
 #shop h2 {
     margin: 0 auto;
     font-family: Comic Sans MS;

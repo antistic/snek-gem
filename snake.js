@@ -1,5 +1,3 @@
-/*jshint browser: true, jquery: true*/
-
 function SnakeGame(canvas) {
     var self = this,
         context,
@@ -12,6 +10,7 @@ function SnakeGame(canvas) {
         timer = null,
         direction = 'E',
         food = [],
+        tickSpeed = 500,
         snek;
 
     this.score = 0;
@@ -245,7 +244,7 @@ function SnakeGame(canvas) {
         if (timer === null) {
             timer = window.setInterval(function () {
                 self.tick();
-            }, 200);
+            }, tickSpeed);
         }
     };
 
@@ -319,5 +318,14 @@ function SnakeGame(canvas) {
         for (var i = 0; i < food.length; i++) {
             drawInCell(foodCell, food[i].x, food[i].y);
         }
+    };
+
+    this.changeSpeed = function (speed) {
+        tickSpeed = speed;
+
+        clearInterval(timer);
+        timer = window.setInterval(function () {
+            self.tick();
+        }, tickSpeed);
     };
 }

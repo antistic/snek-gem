@@ -1,8 +1,7 @@
-/*jshint browser: true, jquery: true*/
 var unlocks = {
     shop: {
         buttonText: 'buy a shop',
-        price: [[5, 'apples']],
+        price: [[2, 'apples']],
         viewInfo: {
             image: '/media/shop.png',
             text: "buy a shop. from where? a shop. which you are buying.",
@@ -12,7 +11,7 @@ var unlocks = {
             $('#shop').removeClass('notashop');
             $('#shop').prepend('<h2>Shop</h2>');
         },
-        unlocks: 'appleColour'
+        unlocks: ['appleColour', 'faster1']
     },
     appleColour: {
         buttonText: 'colour your apples',
@@ -24,7 +23,34 @@ var unlocks = {
         },
         unlockAction: function () {
             game.snakeGame.redApple();
-        }
+        },
+        unlocks: []
+    },
+    faster1: {
+        buttonText: 'buy some speed',
+        price: [[5, 'apples']],
+        viewInfo: {
+            image: '.media/faster300.png',
+            text: "*approaches you in a dark alley near a sketchy nightclub* want some speed? here, first hit's only 7 apples...",
+            boughtText: "you got your speed. you feel faster. you want to go back for more"
+        },
+        unlockAction: function () {
+            game.snakeGame.changeSpeed(350);
+        },
+        unlocks: ['faster2']
+    },
+    faster2: {
+        buttonText: 'buy some more speed',
+        price: [[7, 'apples']],
+        viewInfo: {
+            image: '.media/faster200.png',
+            text: "so, you've come back for more...",
+            boughtText: "you feel the rush of adrenaline"
+        },
+        unlockAction: function () {
+            game.snakeGame.changeSpeed(200);
+        },
+        unlocks: []
     }
 };
 
@@ -121,24 +147,34 @@ function Items() {
                     }
                 }
                 if (canBuy) {
+                    // deduct price
                     for (i = 0; i < price.length; i++) {
                         game.inventory[price[i][1]] -= price[i][0];
                     }
-                    unlocks[item].unlockAction();
-                    newUnlockable(unlocks[item].unlocks);
-                    game.unlocked.push(item);
+                    game.updateInfoBar();
 
+                    // unlock new things
+                    for (i = 0; i < unlocks[item].unlocks.length; i++) {
+                        newUnlockable(unlocks[item].unlocks[i]);
+                    }
+
+                    // it's now unlocked!!
+                    unlocks[item].unlockAction();
+                    game.unlocked.push(item);
                     var index = game.unlockable.indexOf(item);
                     if (index > -1) {
                         game.unlockable.splice(index, 1);
                     }
 
+                    // show message
                     $(this).mouseleave = null;
                     boughtInfo(unlocks[item]);
 
+                    // safety
                     game.saveGame();
                     game.checkEmptyShop();
 
+                    // gooooodbye
                     $(this).remove();
                 } else {
                     game.addMessage("Can't buy. You're too poor.");
