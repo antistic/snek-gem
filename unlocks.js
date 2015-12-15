@@ -30,7 +30,7 @@ var unlocks = {
         buttonText: 'buy some speed',
         price: [[5, 'apples']],
         viewInfo: {
-            image: '.media/faster300.png',
+            image: '.media/faster.png',
             text: "*approaches you in a dark alley near a sketchy nightclub* want some speed? here, first hit's only 7 apples...",
             boughtText: "you got your speed. you feel faster. you want to go back for more"
         },
@@ -43,7 +43,7 @@ var unlocks = {
         buttonText: 'buy some more speed',
         price: [[7, 'apples']],
         viewInfo: {
-            image: '.media/faster200.png',
+            image: '.media/faster2.png',
             text: "so, you've come back for more...",
             boughtText: "you feel the rush of adrenaline"
         },
