@@ -151,6 +151,7 @@ function Items() {
                     for (i = 0; i < price.length; i++) {
                         game.inventory[price[i][1]] -= price[i][0];
                     }
+                    game.updateInfoBar();
 
                     // unlock new things
                     for (i = 0; i < unlocks[item].unlocks.length; i++) {
