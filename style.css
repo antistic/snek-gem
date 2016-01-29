@@ -98,6 +98,12 @@ h1 {
     cursor: pointer;
 }
 
+#items button.greyedOut,
+#items button.greyedOut:hover {
+    background-color: #555;
+    cursor: default;
+}
+
 #mainInfo {
     border: 1px solid #222;
     flex: 1;
