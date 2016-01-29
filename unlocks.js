@@ -51,6 +51,19 @@ var unlocks = {
             game.snakeGame.changeSpeed(200);
         },
         unlocks: []
+    },
+    pause: {
+        buttonText: 'stooooop',
+        price: [[8, 'apples']],
+        viewInfo: {
+            image: './media/pause.png',
+            text: 'stooooop. start. stooooooop. start.',
+            boughtText: "SPACE TO PAUSE. <br>why do you have to pause anyway. paising means you leave, and you don't want to be doing that"
+        },
+        unlockAction: function () {
+            game.snakeGame.unlockPause();
+        },
+        unlocks: []
     }
 };
 

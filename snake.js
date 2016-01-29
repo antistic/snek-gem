@@ -277,6 +277,30 @@ function SnakeGame(canvas) {
         }
     }
 
+    var pauseHandler = function () {
+        // by default, empty. see unlock section
+    };
+
+    function pauseToggle() {
+        if (info.paused) {
+            $('.gameOverlay').remove();
+
+            window.addEventListener('keydown', movementHandler, false);
+
+            info.timer.restartTimer();
+            info.paused = false;
+        } else {
+            info.timer.stopTimer();
+            $('#game').append('<div class="gameOverlay"><p>gem paused <span>press space</span></p></div>');
+            $('.gameOverlay').height(canvas.height);
+            $('.gameOverlay').width(canvas.width);
+
+            window.removeEventListener('keydown', movementHandler);
+
+            info.paused = true;
+        }
+    }
+
     function blockDefault(e) {
         // don't let arrow keys/space move the screen about
         if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
@@ -306,6 +330,18 @@ function SnakeGame(canvas) {
         window.addEventListener('keydown', restartHandler, false);
     }
 
+    info.timer.stopTimer = function () {
+        clearInterval(info.timer.timer);
+        info.timer.timer = null;
+    };
+
+    info.timer.restartTimer = function () {
+        clearInterval(info.timer.timer);
+        info.timer.timer = window.setInterval(function () {
+            self.tick();
+        }, info.tickSpeed);
+    };
+
     // what happens every tick
     this.tick = function () {
         snek.changeDir(info.direction);
@@ -328,9 +364,13 @@ function SnakeGame(canvas) {
         info.timer.restartTimer();
     };
 
-        clearInterval(timer);
-        timer = window.setInterval(function () {
-            self.tick();
-        }, tickSpeed);
+    this.unlockPause = function () {
+        pauseHandler = function (e) {
+            // pause and unpause on space
+            if (e.keyCode === 32) {
+                pauseToggle();
+            }
+        };
+        window.addEventListener('keydown', pauseHandler, false);
     };
 }
