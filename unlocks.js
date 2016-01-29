@@ -3,7 +3,7 @@ var unlocks = {
         buttonText: 'buy a shop',
         price: [[2, 'apples']],
         viewInfo: {
-            image: '/media/shop.png',
+            image: './media/shop.png',
             text: "buy a shop. from where? a shop. which you are buying.",
             boughtText: "you bought a shop. or rather, access to one. you have to buy the things in it separately. lol"
         },
@@ -17,7 +17,7 @@ var unlocks = {
         buttonText: 'colour your apples',
         price: [[3, 'apples']],
         viewInfo: {
-            image: '/media/apple.png',
+            image: './media/apple.png',
             text: "colour your apples! now you won't ever confuse them with your snake again. what do you mean you were never confused. you were. you so  were.",
             boughtText: "despite the image, your apple is still square shaped. but at least it's red...?"
         },
@@ -30,20 +30,20 @@ var unlocks = {
         buttonText: 'buy some speed',
         price: [[5, 'apples']],
         viewInfo: {
-            image: '.media/faster.png',
+            image: './media/faster.png',
             text: "*approaches you in a dark alley near a sketchy nightclub* want some speed? here, first hit's only 7 apples...",
             boughtText: "you got your speed. you feel faster. you want to go back for more"
         },
         unlockAction: function () {
             game.snakeGame.changeSpeed(350);
         },
-        unlocks: ['faster2']
+        unlocks: ['faster2', 'pause']
     },
     faster2: {
         buttonText: 'buy some more speed',
         price: [[7, 'apples']],
         viewInfo: {
-            image: '.media/faster2.png',
+            image: './media/faster2.png',
             text: "so, you've come back for more...",
             boughtText: "you feel the rush of adrenaline"
         },
