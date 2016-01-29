@@ -205,6 +205,7 @@ function Items() {
         });
 
         $items.append(b);
+        return b;
     };
 
     function newUnlockable(item) {
@@ -213,7 +214,9 @@ function Items() {
         } else {
             $('#empty').remove();
             game.unlockable.push(item);
-            self.makeButton(item);
+            var button = self.makeButton(item);
+            button.hide();
+            button.fadeIn(500);
         }
     }
 
