@@ -7,10 +7,15 @@ function SnakeGame(canvas) {
             height: 16,
             width: 25
         },
-        timer = null,
-        direction = 'E',
-        food = [],
-        tickSpeed = 500,
+        info = {
+            timer: {
+                timer: null,
+            },
+            direction: 'E',
+            food: [],
+            tickSpeed: 500,
+            paused: false,
+        },
         snek;
 
     this.score = 0;
@@ -156,7 +161,7 @@ function SnakeGame(canvas) {
             }
 
             // if you didn't have food
-            var foodCollision = findCoordInArray(newHead, food);
+            var foodCollision = findCoordInArray(newHead, info.food);
             if (foodCollision === (-1)) {
                 var end = this.body.pop();
                 clearCell("black", end.x, end.y);
@@ -166,7 +171,7 @@ function SnakeGame(canvas) {
                 game.inventory.apples++;
                 game.saveGame();
                 // remove from foodlist
-                food.splice(foodCollision, 1);
+                info.food.splice(foodCollision, 1);
                 makeFood(snek.body.concat(newHead));
             }
 
@@ -187,7 +192,7 @@ function SnakeGame(canvas) {
     /* actual snake game shenanigans */
     function makeFood(coordArray) {
         var foodCoord = randomCoord(coordArray);
-        food.push(foodCoord);
+        info.food.push(foodCoord);
         drawInCell(foodCell, foodCoord.x, foodCoord.y);
     }
 
@@ -226,9 +231,9 @@ function SnakeGame(canvas) {
         window.addEventListener('keydown', movementHandler, false);
 
         // reset variables
-        direction = 'E';
+        info.direction = 'E';
         self.score = 0;
-        food = [];
+        info.food = [];
         snek = new Snek([new Coord(11, 10),
                          new Coord(10, 10),
                          new Coord(9, 10)], "E");
@@ -241,10 +246,9 @@ function SnakeGame(canvas) {
         game.updateInfoBar();
 
         // restart timer
-        if (timer === null) {
-            timer = window.setInterval(function () {
-                self.tick();
-            }, tickSpeed);
+        if (info.timer.timer === null) {
+            info.timer.restartTimer();
+            info.paused = false;
         }
     };
 
@@ -252,16 +256,16 @@ function SnakeGame(canvas) {
         e = e || window.event;
         switch (e.keyCode) {
         case 38:
-            direction = "N";
+            info.direction = "N";
             break;
         case 40:
-            direction = "S";
+            info.direction = "S";
             break;
         case 37:
-            direction = "W";
+            info.direction = "W";
             break;
         case 39:
-            direction = "E";
+            info.direction = "E";
             break;
         }
     }
@@ -273,6 +277,30 @@ function SnakeGame(canvas) {
         }
     }
 
+    var pauseHandler = function () {
+        // by default, empty. see unlock section
+    };
+
+    function pauseToggle() {
+        if (info.paused) {
+            $('.gameOverlay').remove();
+
+            window.addEventListener('keydown', movementHandler, false);
+
+            info.timer.restartTimer();
+            info.paused = false;
+        } else {
+            info.timer.stopTimer();
+            $('#game').append('<div class="gameOverlay"><p>gem paused <span>press space</span></p></div>');
+            $('.gameOverlay').height(canvas.height);
+            $('.gameOverlay').width(canvas.width);
+
+            window.removeEventListener('keydown', movementHandler);
+
+            info.paused = true;
+        }
+    }
+
     function blockDefault(e) {
         // don't let arrow keys/space move the screen about
         if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
@@ -281,8 +309,7 @@ function SnakeGame(canvas) {
     }
 
     function gameOver() {
-        clearInterval(timer);
-        timer = null;
+        info.timer.stopTimer();
 
         // safety first
         game.saveGame();
@@ -303,9 +330,21 @@ function SnakeGame(canvas) {
         window.addEventListener('keydown', restartHandler, false);
     }
 
+    info.timer.stopTimer = function () {
+        clearInterval(info.timer.timer);
+        info.timer.timer = null;
+    };
+
+    info.timer.restartTimer = function () {
+        clearInterval(info.timer.timer);
+        info.timer.timer = window.setInterval(function () {
+            self.tick();
+        }, info.tickSpeed);
+    };
+
     // what happens every tick
     this.tick = function () {
-        snek.changeDir(direction);
+        snek.changeDir(info.direction);
         snek.move(context);
         game.updateInfoBar();
     };
@@ -315,17 +354,23 @@ function SnakeGame(canvas) {
         foodCell = makeBlockImg("red");
 
         //make current food red
-        for (var i = 0; i < food.length; i++) {
-            drawInCell(foodCell, food[i].x, food[i].y);
+        for (var i = 0; i < info.food.length; i++) {
+            drawInCell(foodCell, info.food[i].x, info.food[i].y);
         }
     };
 
     this.changeSpeed = function (speed) {
-        tickSpeed = speed;
+        info.tickSpeed = speed;
+        info.timer.restartTimer();
+    };
 
-        clearInterval(timer);
-        timer = window.setInterval(function () {
-            self.tick();
-        }, tickSpeed);
+    this.unlockPause = function () {
+        pauseHandler = function (e) {
+            // pause and unpause on space
+            if (e.keyCode === 32) {
+                pauseToggle();
+            }
+        };
+        window.addEventListener('keydown', pauseHandler, false);
     };
 }
