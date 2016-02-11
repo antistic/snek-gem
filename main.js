@@ -47,6 +47,21 @@ function Game() {
         self.addMessage("Game Loaded");
     };
 
+    this.resetGame = function () {
+        localStorage.clear();
+
+        game.snakeGame = null;
+        game.unlocked = [];
+        game.unlockable = ['shop'];
+        game.inventory = {
+            apples: 0
+        };
+
+        game.saveGame();
+
+        window.location.reload();
+    };
+
     this.updateInfoBar = function () {
         $('#apples').text("Apples: " + self.inventory.apples);
         $('#score').text("Score: " + self.snakeGame.score);
